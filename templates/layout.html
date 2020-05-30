@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RPG Poker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  </head>
+  <body>
+  
+	<!-- D3.js -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> -->
+    <!-- Plotly.js -->
+    <!-- <script src="https://d14fo0winaifog.cloudfront.net/plotly-basic.js"></script> -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+	
+	<div class="header1">
+		<div class="headerleft">
+		<button onclick="document.getElementById('details').style.display='block'" class="w3-button w3-black">Combat Details</button>
+			<div id="details" class="w3-modal">
+				<div class="w3-modal-content">
+				  <div class="w3-container">
+					<span onclick="document.getElementById('details').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+						<p> Attack Requirement = Hitpoints > 0, Costs 4 Endurance </p>
+						<p> Attack Order = By Speed </p>
+						<p> Damage = Power//6 + Speed//6 + Endurance//6 + Luck//6 </p>
+						<p> Each round all Characters gain 1 Endurance </p>
+				  </div>
+				</div>
+			</div>
+		</div>
+		<div class="headerright">
+			<button onclick="document.getElementById('scoringdetails').style.display='block'" class="w3-button w3-black">Scoring Details</button>
+			<div id="scoringdetails" class="w3-modal">
+				<div class="w3-modal-content">
+				  <div class="w3-container">
+					<span onclick="document.getElementById('scoringdetails').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+						<p> The first bid is worth 5 points, less how far off it was from the actual result.  Cannot be less than 0. </p>
+						<p> The first bid is worth 4 points, less how far off it was from the actual result.  Cannot be less than 0. </p>
+						<p> The first bid is worth 3 points, less how far off it was from the actual result.  Cannot be less than 0. </p>
+						<p> The first bid is worth 2 points, less how far off it was from the actual result.  Cannot be less than 0. </p>
+				  </div>
+				</div>
+			</div>
+		</div>
+		<div class="headercenter">RPG Poker</div>
+	</div>
+		
+	<div class="container">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </body>
+</html>

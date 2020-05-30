@@ -1,0 +1,85 @@
+ <div id="game" style="display:none">
+		<div class="row">
+			<div class="column">
+				<p style="line-height:10%"><h2>Player Stats</h2></p>
+				<p class="stats" id="playerstats"></p>
+				<script>
+				var playerstatslist = {{PrintPlayerStats|tojson}};
+				var text = "";
+				var i;
+				for (i = 0; i < playerstatslist.length; i++) {
+					text += playerstatslist[i] + "<br>";
+					}
+				document.getElementById("playerstats").innerHTML = text;
+				</script>
+			</div>
+			<div class="column">
+				<p style="line-height:10%"><h2>Enemy Stats</h2></p>
+				<p class="stats" id="enemystats"></p>
+				<script>
+				var enemystatslist = {{PrintEnemyStats|tojson}};
+				var text = "";
+				var i;
+				for (i = 0; i < enemystatslist.length; i++) {
+					text += enemystatslist[i] + "<br>";
+					}
+				document.getElementById("enemystats").innerHTML = text;
+				</script>
+			</div>
+		</div>
+		
+		<button onclick="showdetails()">Show details.</button>
+		<button onclick="hidedetails()">Hide details.</button>
+		
+		<div class="details", id="details">
+			
+			<p class="stats"> Attack Requirement = Hitpoints > 0, Costs 4 Endurance </p>
+			<p class="stats"> Attack Order = By Speed </p>
+			<p class="stats"> Damage = Power//6 + Speed//6 + Endurance//6 + Luck//6 </p>
+			<p class="stats"> Each round all Characters gain 1 Endurance </p>
+		</div>
+
+		<button onclick="showcombat()">Show me the battle.</button>
+		<button onclick="showstats()">Show me the stats.</button>
+		
+		<div class="row">
+			<div class="column">
+				<div class="chart" id="playerstatsplot" >
+					<!-- <script type="text/javascript"> -->
+					<script type="text/javascript">
+						var graphs1 = {{graphJSON1 | safe}};
+						Plotly.plot('playerstatsplot',graphs1,{});        
+					</script>
+				</div>
+			</div>
+			<div class="column">
+				<div class="chart" id="enemystatsplot"  >
+					<script>
+						var graphs2 = {{graphJSON2 | safe}};
+						Plotly.plot('enemystatsplot',graphs2, {});     
+					</script>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<!-- <p> The {{winner}} team has won!!</p> I need to send the winner variable from the python code -->
+			<div class="column">
+				<div class="chart" id="combathitpoints" style="display:none">
+					<script>
+						var graphs3 = {{graphJSONcombathitpoints | safe}};
+						Plotly.plot('combathitpoints',graphs3,{});        
+					</script>
+				</div>
+			</div>
+			<div class="column">
+				<div class="chart" id="combatendurance" style="display:none" >
+					<script>
+						var graphs4 = {{graphJSONcombatendurance | safe}};
+						Plotly.plot('combatendurance',graphs4, {});     
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>

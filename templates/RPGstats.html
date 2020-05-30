@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block content %}
+	<div class="row">
+		<div class="column">
+			<p style="line-height:10%"><h2>Player Stats</h2></p>
+			<p class="stats" id="playerstats"></p>
+			<script>
+			var playerstatslist = {{PrintPlayerStats|tojson}};
+			var text = "";
+			var i;
+			for (i = 0; i < playerstatslist.length; i++) {
+				text += playerstatslist[i] + "<br>";
+				}
+			document.getElementById("playerstats").innerHTML = text;
+			</script>
+		</div>
+		<div class="column">
+			<p style="line-height:10%"><h2>Enemy Stats</h2></p>
+			<p class="stats" id="enemystats"></p>
+			<script>
+			var enemystatslist = {{PrintEnemyStats|tojson}};
+			var text = "";
+			var i;
+			for (i = 0; i < enemystatslist.length; i++) {
+				text += enemystatslist[i] + "<br>";
+				}
+			document.getElementById("enemystats").innerHTML = text;
+			</script>
+		</div>
+	</div>
+	<br> <a href="{{ url_for('RPGbattle') }}">Click Here to See the Battle!</a> <br>
+	<div class="row">
+		<div class="column">
+			<div class="chart" id="playerstatsplot" >
+				<!-- <script type="text/javascript"> -->
+				<script type="text/javascript">
+					var graphs1 = {{graphJSON1 | safe}};
+					Plotly.plot('playerstatsplot',graphs1,{});        
+				</script>
+			</div>
+		</div>
+		<div class="column">
+			<div class="chart" id="enemystatsplot"  >
+				<script>
+					var graphs2 = {{graphJSON2 | safe}};
+					Plotly.plot('enemystatsplot',graphs2, {});     
+				</script>
+			</div>
+		</div>
+	</div>
+{% endblock %}
